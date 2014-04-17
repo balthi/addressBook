@@ -1,0 +1,41 @@
+<Book name="contacts">
+    <contact name="Bob Wilson">
+        <name>Bob Wilson</name>
+        <address>123 Groovy St.</address>
+        <city>Austin</city>
+        <state>TX</state>
+        <zip>78755</zip>
+    </contact>
+    
+    <contact name="Bob Wilson">
+        <name>Bob Wilson</name>
+        <address>123 Groovy St.</address>
+        <city>Austin</city>
+        <state>TX</state>
+        <zip>78755</zip>
+    </contact>
+    
+    <contact name="Jane Baker">
+            <name>Jane Baker</name>
+            <address>123 Groovy St.</address>
+            <city>Denver</city>
+            <state>CO</state>
+            <zip>80294</zip>
+    </contact>
+    
+    <contact name="Jill Park">
+            <name>Jill Park</name>
+            <address>5743 Maple Ave.</address>
+            <city>Tucson</city>
+            <state>AZ</state>
+            <zip>85726</zip>
+    </contact>
+    
+    <contact name="Matt Williams">
+            <name>Matt Williams</name>
+            <address>8547 E 43rd. St.</address>
+            <city>Chicago</city>
+            <state>IL</state>
+            <zip>60623</zip>
+    </contact>
+</Book>
