@@ -1,5 +1,6 @@
 package addressBook;
 
+import java.util.Date;
 import outputFormatter.FieldFormatter;
 import outputFormatter.XMLFieldFormatter;
 import outputFormatter.JSONFieldFormatter;
@@ -17,6 +18,7 @@ public class Contact
       this.city = city;
       this.state = state;
       this.zip = zip;
+      this.lastUpdated = new Date();
    }
    
    /*
@@ -29,6 +31,7 @@ public class Contact
       this.city = city;
       this.state = state;
       this.zip = zip;
+      this.lastUpdated = new Date();
       
       outputFormat = outputFormat.toLowerCase();
       switch (outputFormat.charAt(0)) 
@@ -53,6 +56,7 @@ public class Contact
    private String city;
    private String state;
    private String zip;
+   private Date lastUpdated;
    private FieldFormatter formatter;
    
    /**
@@ -132,9 +136,9 @@ public class Contact
    */
    public void writeToFile(String file)
    {
-      String[] fields = {"name", "address", "city", "state", "zip"};
-      String[] values = {this.name, this.address, this.city, this.state, this.zip};
+      String[] fields = {"name", "address", "city", "state", "zip", "updated"};
+      String[] values = {this.name, this.address, this.city, this.state, this.zip, this.lastUpdated.toString()};
       
-      formatter.writeToFile(fields, values, 5, "contact", file);
+      formatter.writeToFile(fields, values, 6, "contact", file);
    }
 }
