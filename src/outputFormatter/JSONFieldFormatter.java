@@ -7,70 +7,40 @@ import java.lang.SecurityException;
 
 public class JSONFieldFormatter extends FieldFormatter
 {
+
+   private static final String DIRECTORY = "R\\output\\";
+   private static final String EXTENSION = ".json";
+   
    @Override
    public void writeToFile(String[] fields, String[] values, int length, String identifier, String container)
    {
+      String content = getString(fields, values, length, identifier);
+      writeFile(content, DIRECTORY, EXTENSION, container);
+   }
+   
+   private String getString(String[] fields, String[] values, int length, String identifier)
+   {
       String nl = System.getProperty("line.separator");
-      File f;
-      FileWriter fr;
       int i;
+      String output;
       
-      /*
-      * Try opening a file with the given container name, and appending all
-      * fields to that file. If the file does not exist, create the file and
-      * then append fields to the file
-      */
-      try
+      output = ("{\"" + identifier + "\": { ");
+      
+      for(i=0; i<length; i++)
       {
-         f = new File("R\\output\\" + container + ".json");
-         
-         try
+         output = (output + "\"" + fields[i] + "\":\"" + values[i] + "\"");
+         if(i < length-1)
          {
-            if(!f.exists())
-            {
-               f.createNewFile();
-            }
-            else
-            {
-               try 
-               {
-                  f.setWritable(true);
-               }
-               catch (SecurityException se)
-               {
-                  se.printStackTrace();
-               }
-            }
-                        
-            fr = new FileWriter(f, true);
-            fr.write("{ \"" + identifier + "\": { ");
-            
-            for(i=0; i < length; i++)
-            {
-               fr.write("\"" + fields[i] + "\":\"" + values[i] + "\"");
-               if(i == length-1) 
-               {
-                  fr.write(" ");
-               }
-               else
-               {
-                  fr.write(", ");
-               }
-            }
-            
-            fr.write("} }" + nl);
-            
-            fr.close();
-
+            output = (output + ", ");
          }
-         catch(IOException ioeWrite)
+         else
          {
-            ioeWrite.printStackTrace();
-         } //close catch from writing file
+            output = (output + " ");
+         }
       }
-      catch(NullPointerException npe)
-      {
-         npe.printStackTrace();
-      } // close catch from open file
+      
+      output = (output + "} }" + nl);
+      
+      return output;
    }
 }
