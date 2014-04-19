@@ -24,7 +24,7 @@ public class Contact
    /*
    * Constructs a contact object with the given output formatter.
    */
-   public Contact(String name, String address, String city, String state, String zip, String outputFormat)
+   public Contact(String name, String address, String city, String state, String zip, FieldFormatter formatter)
    {
       this.name = name;
       this.address = address;
@@ -32,23 +32,7 @@ public class Contact
       this.state = state;
       this.zip = zip;
       this.lastUpdated = new Date();
-      
-      outputFormat = outputFormat.toLowerCase();
-      switch (outputFormat.charAt(0)) 
-      {
-         case 'x':
-            this.formatter = new XMLFieldFormatter();
-            break;
-         case 'j':
-            this.formatter = new JSONFieldFormatter();
-            break;
-         case 'p':
-            this.formatter = new PlainTextFieldFormatter();
-            break;
-         default:
-            this.formatter = new PlainTextFieldFormatter();
-            break;
-      }
+      this.formatter = formatter;
    }
    
    private String name;
@@ -58,6 +42,21 @@ public class Contact
    private String zip;
    private Date lastUpdated;
    private FieldFormatter formatter;
+   
+   /**
+   * Sets XML as the output format
+   */
+   public static final FieldFormatter XML = new XMLFieldFormatter();
+   
+   /**
+   * Sets JSON as the output format
+   */
+   public static final FieldFormatter JSON = new JSONFieldFormatter();
+   
+   /**
+   * Sets Plaintext as the output format
+   */
+   public static final FieldFormatter PLAIN = new PlainTextFieldFormatter();
    
    /**
    * Returns true if all fields in both contacts are the same.
@@ -72,7 +71,7 @@ public class Contact
    */
    public String getAddress()
    {
-      return this.address;
+      return address;
    }
    
    /**
@@ -80,7 +79,7 @@ public class Contact
    */
    public String getCity()
    {
-      return this.city;
+      return city;
    }
    
    /**
@@ -88,7 +87,7 @@ public class Contact
    */
    public String getName()
    {
-      return this.name;
+      return name;
    }
    
    /**
@@ -96,7 +95,7 @@ public class Contact
    */
    public String getState()
    {
-      return this.state;
+      return state;
    }
    
    /**
@@ -104,31 +103,16 @@ public class Contact
    */
    public String getZip()
    {
-      return this.zip;
+      return zip;
    }
    
    /**
    * Set the formatting standard for file or console writing.
    * String must be "xml", "json" or "plain"
    */
-   public void setFormatter(String outputFormat)
+   public void setFormatter(FieldFormatter formatter)
    {
-      outputFormat = outputFormat.toLowerCase();
-      switch (outputFormat.charAt(0)) 
-      {
-         case 'x':
-            this.formatter = new XMLFieldFormatter();
-            break;
-         case 'j':
-            this.formatter = new JSONFieldFormatter();
-            break;
-         case 'p':
-            this.formatter = new PlainTextFieldFormatter();
-            break;
-         default:
-            System.err.println("Invalid output format. Valid formats are \"xml\", \"json\", and \"plain\"");
-            break;
-      }
+      this.formatter = formatter;
    }
    
    /**
@@ -137,7 +121,7 @@ public class Contact
    public void writeToFile(String file)
    {
       String[] fields = {"name", "address", "city", "state", "zip", "updated"};
-      String[] values = {this.name, this.address, this.city, this.state, this.zip, this.lastUpdated.toString()};
+      String[] values = {name, address, city, state, zip, lastUpdated.toString()};
       
       formatter.writeToFile(fields, values, 6, "contact", file);
    }
