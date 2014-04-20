@@ -9,15 +9,14 @@ public class PlainTextFieldFormatter_Test extends TestCase
 {
    private static String nl = System.getProperty("line.separator");
    private PlainTextFieldFormatter formatter;
-   private static final String EXPECTED = ("contact" + nl
-                                          + "name: Bob Wilson" + nl
+   private static final String EXPECTED = ("person: Bob Wilson" + nl
                                           + "address: 123 Groovy St." + nl
                                           + "city: Austin" + nl
                                           + "state: TX" + nl
                                           + "zip: 78755"+ nl
                                           + nl);
                                
-   private static final String[] FIELDS = {"name", "address", "city", "state", "zip"};
+   private static final String[] FIELDS = {"person", "address", "city", "state", "zip"};
    private static final String[] VALUES = {"Bob Wilson", "123 Groovy St.", "Austin", "TX", "78755"};
    private static final String IDENTIFIER = "contact";
    private static final String FILE_PATH = "R\\output\\test\\PlainTextTestFile.txt";
@@ -30,7 +29,7 @@ public class PlainTextFieldFormatter_Test extends TestCase
    
    public void testWriteToFile()
    {
-      formatter.writeToFile(FIELDS, VALUES, IDENTIFIER, FILE_PATH);
+      formatter.writeToFile(FIELDS, VALUES, FILE_PATH);
       File f = new File(FILE_PATH);
       try
       {
@@ -38,6 +37,7 @@ public class PlainTextFieldFormatter_Test extends TestCase
          in.useDelimiter("//Z");
          String input = in.next();
          in.close();
+         System.out.println(input);
          assertTrue("Error in testWriteToFile: incorrect string found" + nl
                      + "Expected: " + nl
                      + EXPECTED 

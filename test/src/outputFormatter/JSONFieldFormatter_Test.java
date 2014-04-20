@@ -9,13 +9,13 @@ public class JSONFieldFormatter_Test extends TestCase
 {
    private static String nl = System.getProperty("line.separator");
    private JSONFieldFormatter formatter;
-   private static final String EXPECTED = ("{\"contact\": { \"name\":\"Bob Wilson\", "
-                                          + "\"address\":\"123 Groovy St.\", "
-                                          + "\"city\":\"Austin\", "
-                                          + "\"state\":\"TX\", "
-                                          + "\"zip\":\"78755\" } }" + nl);
+   private static final String EXPECTED = ("{\"person\":\"Bob Wilson\","
+                                          + "\"address\":\"123 Groovy St.\","
+                                          + "\"city\":\"Austin\","
+                                          + "\"state\":\"TX\","
+                                          + "\"zip\":\"78755\"}" + nl);
                                
-   private static final String[] FIELDS = {"name", "address", "city", "state", "zip"};
+   private static final String[] FIELDS = {"person", "address", "city", "state", "zip"};
    private static final String[] VALUES = {"Bob Wilson", "123 Groovy St.", "Austin", "TX", "78755"};
    private static final String IDENTIFIER = "contact";
    private static final String FILE_PATH = "R\\output\\test\\JSONTestFile.json";
@@ -27,7 +27,7 @@ public class JSONFieldFormatter_Test extends TestCase
    
    public void testWriteToFile()
    {
-      formatter.writeToFile(FIELDS, VALUES, IDENTIFIER, FILE_PATH);
+      formatter.writeToFile(FIELDS, VALUES, FILE_PATH);
       File f = new File(FILE_PATH);
       try
       {
@@ -35,6 +35,7 @@ public class JSONFieldFormatter_Test extends TestCase
          in.useDelimiter("//Z");
          String input = in.next();
          in.close();
+         System.out.println(input);
          assertTrue("Error in testWriteToFile: incorrect string found" + nl
                      + "Expected: " + nl
                      + EXPECTED 

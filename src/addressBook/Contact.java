@@ -26,7 +26,6 @@ public class Contact
    private String city;
    private String state;
    private String zip;
-   private String relationship = "contact";
    private Date lastUpdated;
    private FieldFormatter formatter;
    
@@ -119,16 +118,6 @@ public class Contact
    }
    
    /**
-   * Sets the relationship with the given contact.
-   * The default relationship is "contact"
-   */
-   public void setRelationship(String relationship)
-   {
-      this.relationship = relationship;
-      this.lastUpdated = new Date();
-   }
-   
-   /**
    * Write the contact to the file specified
    */
    public void writeToFile(String fileName)
@@ -145,9 +134,9 @@ public class Contact
       {
          formatter = new PlainTextFieldFormatter();
       }
-      String[] fields = {"name", "address", "city", "state", "zip", "updated"};
+      String[] fields = {"person", "address", "city", "state", "zip", "updated"};
       String[] values = {name, address, city, state, zip, lastUpdated.toString()};
       
-      formatter.writeToFile(fields, values, relationship, fileName);
+      formatter.writeToFile(fields, values, fileName);
    }
 }

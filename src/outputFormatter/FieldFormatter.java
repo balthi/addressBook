@@ -11,7 +11,7 @@ import java.io.IOException;
 */
 public abstract class FieldFormatter 
 {
-   public void writeToFile(String[] fields, String[] values, String identifier, String fileName)
+   public void writeToFile(String[] fields, String[] values, String fileName)
    {
    }
       

@@ -6,36 +6,39 @@ package outputFormatter;
 */
 public class JSONFieldFormatter extends FieldFormatter
 {   
+   private static final String ERR_MSG = "fields and values must be of the same length";
+   
    @Override
-   public void writeToFile(String[] fields, String[] values, String identifier, String fileName)
+   public void writeToFile(String[] fields, String[] values, String fileName)
    {
-      String content = getString(fields, values, identifier);
+      if(fields.length > values.length)
+      {
+         System.err.println(ERR_MSG);
+         return;
+      }
+      String content = getString(fields, values);
       writeFile(content, fileName);
    }
    
-   private String getString(String[] fields, String[] values, String identifier)
+   private String getString(String[] fields, String[] values)
    {
       String nl = System.getProperty("line.separator");
       int i;
       int length = fields.length;
       String output;
       
-      output = ("{\"" + identifier + "\": { ");
+      output = ("{");
       
       for(i=0; i<fields.length; i++)
       {
          output = (output + "\"" + fields[i] + "\":\"" + values[i] + "\"");
          if(i < length-1)
          {
-            output = (output + ", ");
-         }
-         else
-         {
-            output = (output + " ");
+            output = (output + ",");
          }
       }
       
-      output = (output + "} }" + nl);
+      output = (output + "}" + nl);
       
       return output;
    }
