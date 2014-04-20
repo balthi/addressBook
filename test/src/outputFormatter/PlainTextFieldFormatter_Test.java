@@ -18,7 +18,6 @@ public class PlainTextFieldFormatter_Test extends TestCase
                                
    private static final String[] FIELDS = {"person", "address", "city", "state", "zip"};
    private static final String[] VALUES = {"Bob Wilson", "123 Groovy St.", "Austin", "TX", "78755"};
-   private static final String IDENTIFIER = "contact";
    private static final String FILE_PATH = "R\\output\\test\\PlainTextTestFile.txt";
    
    
