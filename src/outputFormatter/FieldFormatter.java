@@ -3,21 +3,27 @@ package outputFormatter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URI;
 
+/**
+* Abstract class that takes a complex data type which can be 
+* represented as a series of fields and outputs those data types
+* to a file.
+*/
 public abstract class FieldFormatter 
 {
-   public void writeToFile(String[] fields, String[] values, int length, String identifier, String container)
+   public void writeToFile(String[] fields, String[] values, String identifier, String fileName)
    {
    }
       
-   protected static void writeFile(String content, String directory, String extension, String container)
+   protected static void writeFile(String content, String fileName)
    {
       File f;
       FileWriter fr;
       
       try
       {
-         f = new File(directory + container + extension);
+         f = new File(fileName);
          
          if(!f.exists())
          {

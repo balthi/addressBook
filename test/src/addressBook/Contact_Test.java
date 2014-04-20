@@ -1,7 +1,8 @@
 package addressBook;
 
-import static addressBook.Contact.XML;
 import java.io.File;
+import java.net.URI;
+import static java.net.URI.create;
 import junit.framework.TestCase;
 
 public class Contact_Test extends TestCase
@@ -18,9 +19,8 @@ public class Contact_Test extends TestCase
    private static final String CO = "CO";
    private static final String DENVER_ZIP = "80294";
    
-   private static final String XML_FILE = "R\\output\\test\\contactOne.xml";
-   private static final String CONTACT_ONE = "test\\contactOne";
-   
+   private static final String CONTACT_ONE = "R\\output\\test\\contactOne.xml";
+      
    private Contact contactOne;
    private Contact contactTwo;
    private Contact contactThree;
@@ -28,8 +28,8 @@ public class Contact_Test extends TestCase
    
    public void setUp()
    {
-      this.contactOne = new Contact(BOB, GROOVY, AUSTIN, TX, AUSTIN_ZIP, XML);
-      this.contactTwo = new Contact(BOB, GROOVY, AUSTIN, TX, AUSTIN_ZIP, XML);
+      this.contactOne = new Contact(BOB, GROOVY, AUSTIN, TX, AUSTIN_ZIP);
+      this.contactTwo = new Contact(BOB, GROOVY, AUSTIN, TX, AUSTIN_ZIP);
       this.contactThree = new Contact(JANE, GROOVY, DENVER, CO, DENVER_ZIP);
       this.contactFour = new Contact(BOB, MAPLE, AUSTIN, TX, AUSTIN_ZIP);
    }
@@ -52,7 +52,7 @@ public class Contact_Test extends TestCase
    public void testWriteToFile()
    { 
       contactOne.writeToFile(CONTACT_ONE);
-      File f = new File(XML_FILE);
+      File f = new File(CONTACT_ONE);
       assertTrue("Error in testWriteToFile: File does not exist", f.exists());
       f.delete();
    }

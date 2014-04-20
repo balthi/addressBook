@@ -17,11 +17,9 @@ public class JSONFieldFormatter_Test extends TestCase
                                
    private static final String[] FIELDS = {"name", "address", "city", "state", "zip"};
    private static final String[] VALUES = {"Bob Wilson", "123 Groovy St.", "Austin", "TX", "78755"};
-   private static final int LENGTH = 5;
-   private static final String FILE_NAME = "test\\JSONTestFile";
    private static final String IDENTIFIER = "contact";
-   private static final String FILE_PATH = "R\\output\\" + FILE_NAME + ".json";
-   
+   private static final String FILE_PATH = "R\\output\\test\\JSONTestFile.json";
+      
    public void setUp()
    {
       formatter = new JSONFieldFormatter();
@@ -29,7 +27,7 @@ public class JSONFieldFormatter_Test extends TestCase
    
    public void testWriteToFile()
    {
-      formatter.writeToFile(FIELDS, VALUES, LENGTH, IDENTIFIER, FILE_NAME);
+      formatter.writeToFile(FIELDS, VALUES, IDENTIFIER, FILE_PATH);
       File f = new File(FILE_PATH);
       try
       {

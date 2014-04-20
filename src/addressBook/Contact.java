@@ -1,5 +1,6 @@
 package addressBook;
 
+import java.net.URI;
 import java.util.Date;
 import outputFormatter.FieldFormatter;
 import outputFormatter.XMLFieldFormatter;
@@ -21,49 +22,25 @@ public class Contact
       this.lastUpdated = new Date();
    }
    
-   /*
-   * Constructs a contact object with the given output formatter.
-   */
-   public Contact(String name, String address, String city, String state, String zip, FieldFormatter formatter)
-   {
-      this.name = name;
-      this.address = address;
-      this.city = city;
-      this.state = state;
-      this.zip = zip;
-      this.lastUpdated = new Date();
-      this.formatter = formatter;
-   }
-   
    private String name;
    private String address;
    private String city;
    private String state;
    private String zip;
+   private String relationship = "contact";
    private Date lastUpdated;
    private FieldFormatter formatter;
    
-   /**
-   * Sets XML as the output format
-   */
-   public static final FieldFormatter XML = new XMLFieldFormatter();
+   private static String XML = ".xml";
+   private static String JSON = ".json";
+   private static String PLAIN = ".txt";
    
    /**
-   * Sets JSON as the output format
-   */
-   public static final FieldFormatter JSON = new JSONFieldFormatter();
-   
-   /**
-   * Sets Plaintext as the output format
-   */
-   public static final FieldFormatter PLAIN = new PlainTextFieldFormatter();
-   
-   /**
-   * Returns true if all fields in both contacts are the same.
+   * Returns true if name, address and zip fields in both contacts are the same.
    */
    public boolean equals(Contact c)
    {
-      return (this.name.equals(c.getName()) && this.address.equals(c.getAddress()) && this.city.equals(c.getCity()) && this.state.equals(c.getState()) && this.zip.equals(c.getZip()));
+      return (this.name.equals(c.getName()) && this.address.equals(c.getAddress()) && this.zip.equals(c.getZip()));
    }
    
    /**
@@ -107,22 +84,66 @@ public class Contact
    }
    
    /**
-   * Set the formatting standard for file or console writing.
-   * String must be "xml", "json" or "plain"
+   * Sets the address for the contact
    */
-   public void setFormatter(FieldFormatter formatter)
+   public void setAddress(String address)
    {
-      this.formatter = formatter;
+      this.address = address;
+   }
+   
+   /**
+   * Sets the city for the contact
+   */
+   public void setCity(String city)
+   {
+      this.city = city;
+   }
+   
+   /**
+   * Sets the state for the contact
+   */
+   public void setState(String state)
+   {
+      this.state = state;
+   }
+   
+   /*
+   * Sets the zip code for the contact
+   */
+   public void setZip(String zip)
+   {
+      this.zip = zip;
+   }
+   
+   /**
+   * Sets the relationship with the given contact.
+   * The default relationship is "contact"
+   */
+   public void setRelationship(String relationship)
+   {
+      this.relationship = relationship;
    }
    
    /**
    * Write the contact to the file specified
    */
-   public void writeToFile(String file)
+   public void writeToFile(String fileName)
    {
+      if(fileName.contains(XML))
+      {
+         formatter = new XMLFieldFormatter();
+      }
+      else if(fileName.contains(JSON))
+      {
+         formatter = new JSONFieldFormatter();
+      }
+      else if(fileName.contains(PLAIN))
+      {
+         formatter = new PlainTextFieldFormatter();
+      }
       String[] fields = {"name", "address", "city", "state", "zip", "updated"};
       String[] values = {name, address, city, state, zip, lastUpdated.toString()};
       
-      formatter.writeToFile(fields, values, 6, "contact", file);
+      formatter.writeToFile(fields, values, relationship, fileName);
    }
 }

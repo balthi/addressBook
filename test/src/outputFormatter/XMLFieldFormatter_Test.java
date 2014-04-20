@@ -19,10 +19,8 @@ public class XMLFieldFormatter_Test extends TestCase
                                           + "</contact>" + nl);
    private static final String[] FIELDS = {"name", "address", "city", "state", "zip"};
    private static final String[] VALUES = {"Bob Wilson", "123 Groovy St.", "Austin", "TX", "78755"};
-   private static final int LENGTH = 5;
-   private static final String FILE_NAME = "test\\XMLTestFile";
    private static final String IDENTIFIER = "contact";
-   private static final String FILE_PATH = "R\\output\\" + FILE_NAME + ".xml";
+   private static final String FILE_PATH = "R\\output\\test\\XMLTestFile.xml";
    
    public void setUp()
    {
@@ -31,7 +29,7 @@ public class XMLFieldFormatter_Test extends TestCase
    
    public void testWriteToFile()
    {
-      formatter.writeToFile(FIELDS, VALUES, LENGTH, IDENTIFIER, FILE_NAME);
+      formatter.writeToFile(FIELDS, VALUES, IDENTIFIER, FILE_PATH);
       File f = new File(FILE_PATH);
       try
       {

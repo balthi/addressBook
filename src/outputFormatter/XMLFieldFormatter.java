@@ -1,25 +1,21 @@
 package outputFormatter;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.lang.SecurityException;
-
+/**
+* Extends FieldFormatter. Takes a series of fields and values and
+* outputs them to a file in XML format.
+*/
 public class XMLFieldFormatter extends FieldFormatter
 {
-
-   private static final String DIRECTORY = "R\\output\\";
-   private static final String EXTENSION = ".xml";
    private static final String INDENT = "   "; //Default indent is three spaces
    
    @Override
-   public void writeToFile(String[] fields, String[] values, int length, String identifier, String container)
+   public void writeToFile(String[] fields, String[] values, String identifier, String fileName)
    {
-      String content=getString(fields, values, length, identifier);
-      writeFile(content, DIRECTORY, EXTENSION, container);
+      String content=getString(fields, values, identifier);
+      writeFile(content, fileName);
    }
    
-   private String getString(String[] fields, String[] values, int length, String identifier)
+   private String getString(String[] fields, String[] values, String identifier)
    {
       String nl = System.getProperty("line.separator");
       int i;
@@ -27,7 +23,7 @@ public class XMLFieldFormatter extends FieldFormatter
       
       output = ("<" + identifier + " " + fields[0] + "=\"" + values[0] + "\">" + nl);
       
-      for(i=0; i<length; i++)
+      for(i=0; i<fields.length; i++)
       {
          output = (output + INDENT + "<" + fields[i] + ">" + values[i] + "</" + fields[i] + ">" + nl);
       }
