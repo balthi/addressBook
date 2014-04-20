@@ -1,8 +1,6 @@
 package addressBook;
 
 import java.io.File;
-import java.net.URI;
-import static java.net.URI.create;
 import junit.framework.TestCase;
 
 public class Contact_Test extends TestCase
