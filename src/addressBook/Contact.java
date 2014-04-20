@@ -88,6 +88,7 @@ public class Contact
    public void setAddress(String address)
    {
       this.address = address;
+      this.lastUpdated = new Date();
    }
    
    /**
@@ -96,6 +97,7 @@ public class Contact
    public void setCity(String city)
    {
       this.city = city;
+      this.lastUpdated = new Date();
    }
    
    /**
@@ -104,6 +106,7 @@ public class Contact
    public void setState(String state)
    {
       this.state = state;
+      this.lastUpdated = new Date();
    }
    
    /*
@@ -112,6 +115,7 @@ public class Contact
    public void setZip(String zip)
    {
       this.zip = zip;
+      this.lastUpdated = new Date();
    }
    
    /**
@@ -121,6 +125,7 @@ public class Contact
    public void setRelationship(String relationship)
    {
       this.relationship = relationship;
+      this.lastUpdated = new Date();
    }
    
    /**
