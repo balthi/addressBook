@@ -3,7 +3,6 @@ package outputFormatter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.URI;
 
 /**
 * Abstract class that takes a complex data type which can be 
