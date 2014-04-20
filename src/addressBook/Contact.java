@@ -1,6 +1,5 @@
 package addressBook;
 
-import java.net.URI;
 import java.util.Date;
 import outputFormatter.FieldFormatter;
 import outputFormatter.XMLFieldFormatter;
