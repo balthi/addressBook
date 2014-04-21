@@ -17,6 +17,26 @@ public abstract class FieldFormatter
    */
    public void writeToFile(String[] fields, String[] values, String fileName)
    {
+      if(fields.length != values.length)
+      {
+         System.err.println(ERR_MSG);
+         return;
+      }
+      String content=getString(fields, values);
+      writeFile(content, fileName);
+
+   }
+   
+   protected String getString(String[] fields, String[] values)
+   {
+      int i;
+      String output = "";
+      
+      for(i=0; i<fields.length; i++)
+      {
+         output = (output + fields[i] + " " + values[i] + NL);
+      }
+      return output;
    }
       
    protected void writeFile(String content, String fileName)

@@ -7,22 +7,8 @@ public class XMLFieldFormatter extends FieldFormatter
 {
    private static final String INDENT = "   "; //Default indent is three spaces
    
-   /**
-   * Appends fields and values to the specified file
-   */
    @Override
-   public void writeToFile(String[] fields, String[] values, String fileName)
-   {
-      if(fields.length != values.length)
-      {
-         System.err.println(ERR_MSG);
-         return;
-      }
-      String content=getString(fields, values);
-      writeFile(content, fileName);
-   }
-   
-   private String getString(String[] fields, String[] values)
+   protected String getString(String[] fields, String[] values)
    {
       int i;
       String output;

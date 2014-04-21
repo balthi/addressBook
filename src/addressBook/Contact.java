@@ -31,7 +31,8 @@ public class Contact
    private static final String PLAIN = ".txt";
    
    /**
-   * Writes the contact to the file specified
+   * Writes the contact to a file with the 
+   * specified fileName
    */
    public void writeToFile(String fileName)
    {
