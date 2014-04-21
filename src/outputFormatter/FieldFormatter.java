@@ -5,17 +5,21 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
-* Abstract class that takes a complex data type which can be 
-* represented as a series of fields and outputs those data types
-* to a file.
+* Abstract class formats fields and values to specific format.
 */
 public abstract class FieldFormatter 
 {
+   protected static final String NL = System.getProperty("line.separator");
+   protected static final String ERR_MSG = "fields and values must be the same length";
+   
+   /**
+   * Appends the fields and values to the file specified
+   */
    public void writeToFile(String[] fields, String[] values, String fileName)
    {
    }
       
-   protected static void writeFile(String content, String fileName)
+   protected void writeFile(String content, String fileName)
    {
       File f;
       FileWriter fr;
