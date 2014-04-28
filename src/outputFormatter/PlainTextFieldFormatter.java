@@ -1,5 +1,7 @@
 package outputFormatter;
 
+import static configuration.SessionConfiguration.NL;
+
 /**
 * Extends FieldFormatter. Formats fields and values as plaintext.
 */
@@ -19,5 +21,11 @@ public class PlainTextFieldFormatter extends FieldFormatter
       
       output = (output + NL);
       return output;
+   }
+   
+   @Override
+   public String toString()
+   {
+      return("FieldFormatter: Plaintext");
    }
 }

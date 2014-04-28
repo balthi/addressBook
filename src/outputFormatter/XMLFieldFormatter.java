@@ -1,5 +1,7 @@
 package outputFormatter;
 
+import static configuration.SessionConfiguration.NL;
+
 /**
 * Extends FieldFormatter. Formats fields and values as XML.
 */
@@ -23,5 +25,11 @@ public class XMLFieldFormatter extends FieldFormatter
       output = (output + "</" + fields[0] + ">" + NL);
       
       return output;
+   }
+   
+   @Override
+   public String toString()
+   {
+      return("FieldFormatter: XML");
    }
 }

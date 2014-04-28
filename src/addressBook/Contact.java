@@ -1,12 +1,16 @@
 package addressBook;
 
 import outputFormatter.FieldFormatter;
+import outputFormatter.FormatterFactory;
 import outputFormatter.XMLFieldFormatter;
 import outputFormatter.JSONFieldFormatter;
 import outputFormatter.PlainTextFieldFormatter;
 
+import static configuration.SessionConfiguration.ADDRESS_BOOK;
+
 public class Contact 
 {
+   
    /**
    * Constructs a contact object.
    */
@@ -24,39 +28,17 @@ public class Contact
    private String city;
    private String state;
    private String zip;
-   private FieldFormatter formatter;
-   
-   private static final String XML = ".xml";
-   private static final String JSON = ".json";
-   private static final String PLAIN = ".txt";
+   private FieldFormatter formatter = FormatterFactory.getFieldFormatter();
    
    /**
    * Writes the contact to a file with the 
    * specified fileName
    */
-   public void writeToFile(String fileName)
+   public void writeToFile()
    {
-      if(fileName.contains(XML))
-      {
-         formatter = new XMLFieldFormatter();
-      }
-      else if(fileName.contains(JSON))
-      {
-         formatter = new JSONFieldFormatter();
-      }
-      else if(fileName.contains(PLAIN))
-      {
-         formatter = new PlainTextFieldFormatter();
-      }
-      //Provide plaintext as a default formatter
-      else
-      {
-         formatter = new PlainTextFieldFormatter();
-      }
-      
-      String[] fields = {"person", "address", "city", "state", "zip"};
+      String[] fields = {"contact", "address", "city", "state", "zip"};
       String[] values = {name, address, city, state, zip};
       
-      formatter.writeToFile(fields, values, fileName);
+      formatter.writeToFile(fields, values, ADDRESS_BOOK);
    }
 }

@@ -3,19 +3,21 @@ package outputFormatter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URI;
+
+import static configuration.SessionConfiguration.NL;
 
 /**
 * Abstract class formats fields and values to specific format.
 */
 public abstract class FieldFormatter 
 {
-   protected static final String NL = System.getProperty("line.separator");
    protected static final String ERR_MSG = "fields and values must be the same length";
    
    /**
    * Appends the fields and values to the file specified
    */
-   public void writeToFile(String[] fields, String[] values, String fileName)
+   public void writeToFile(String[] fields, String[] values, URI fileName)
    {
       if(fields.length != values.length)
       {
@@ -39,7 +41,7 @@ public abstract class FieldFormatter
       return output;
    }
       
-   protected void writeFile(String content, String fileName)
+   protected void writeFile(String content, URI fileName)
    {
       File f;
       FileWriter fr;

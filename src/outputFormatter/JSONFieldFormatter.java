@@ -1,11 +1,12 @@
 package outputFormatter;
 
+import static configuration.SessionConfiguration.NL;
+
 /**
 * Extends FieldFormatter. Formats fields and values as JSON.
 */
 public class JSONFieldFormatter extends FieldFormatter
-{
-   
+{   
    @Override
    protected String getString(String[] fields, String[] values)
    {
@@ -27,5 +28,11 @@ public class JSONFieldFormatter extends FieldFormatter
       output = (output + "}" + NL);
       
       return output;
+   }
+   
+   @Override
+   public String toString()
+   {
+      return("FieldFormatter: JSON");
    }
 }

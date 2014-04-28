@@ -2,32 +2,37 @@ package outputFormatter;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.net.URI;
 import java.util.Scanner;
 import junit.framework.TestCase;
 
+import static configuration.SessionConfiguration.NL;
+
 public class XMLFieldFormatter_Test extends TestCase
 {
-   private static String nl = System.getProperty("line.separator");
    private XMLFieldFormatter formatter;
    private static final String INDENT = "   "; //indent three spaces
-   private static final String EXPECTED = ("<person Id=\"Bob Wilson\">" + nl
-                                          + INDENT + "<address>123 Groovy St.</address>" + nl
-                                          + INDENT + "<city>Austin</city>" + nl
-                                          + INDENT + "<state>TX</state>" + nl
-                                          + INDENT + "<zip>78755</zip>" + nl
-                                          + "</person>" + nl);
+   private static final String EXPECTED = ("<person Id=\"Bob Wilson\">" + NL
+                                          + INDENT + "<address>123 Groovy St.</address>" + NL
+                                          + INDENT + "<city>Austin</city>" + NL
+                                          + INDENT + "<state>TX</state>" + NL
+                                          + INDENT + "<zip>78755</zip>" + NL
+                                          + "</person>" + NL);
    private static final String[] FIELDS = {"person", "address", "city", "state", "zip"};
    private static final String[] VALUES = {"Bob Wilson", "123 Groovy St.", "Austin", "TX", "78755"};
    private static final String FILE_PATH = "R\\output\\test\\XMLTestFile.xml";
+   private URI testFile;
    
    public void setUp()
    {
       formatter = new XMLFieldFormatter();
+      File f = new File(FILE_PATH);
+      testFile = f.toURI();
    }
    
    public void testWriteToFile()
    {
-      formatter.writeToFile(FIELDS, VALUES, FILE_PATH);
+      formatter.writeToFile(FIELDS, VALUES, testFile);
       File f = new File(FILE_PATH);
       try
       {
@@ -36,10 +41,10 @@ public class XMLFieldFormatter_Test extends TestCase
          String input = in.next();
          in.close();
          System.out.println(input);
-         assertTrue("Error in testWriteToFile: incorrect string found" + nl
-                     + "Expected: " + nl
+         assertTrue("Error in testWriteToFile: incorrect string found" + NL
+                     + "Expected: " + NL
                      + EXPECTED 
-                     + "Found: " + nl
+                     + "Found: " + NL
                      + input, input.equals(EXPECTED));
          f.delete();
       }
