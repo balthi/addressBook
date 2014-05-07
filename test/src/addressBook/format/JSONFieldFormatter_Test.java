@@ -1,4 +1,4 @@
-package outputFormatter;
+package addressbook.format;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -6,7 +6,7 @@ import java.net.URI;
 import java.util.Scanner;
 import junit.framework.TestCase;
 
-import static configuration.SessionConfiguration.NL;
+import static addressbook.configuration.SessionConfiguration.NL;
 
 public class JSONFieldFormatter_Test extends TestCase
 {

@@ -1,4 +1,4 @@
-package addressBook;
+package addressbook;
 
 public interface ContactBuilder
 {

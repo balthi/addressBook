@@ -1,6 +1,6 @@
-package addressBook;
+package addressbook;
 
-import static configuration.SessionConfiguration.REGION;
+import static addressbook.configuration.SessionConfiguration.REGION;
 
 public class ContactBuilderFactory
 {

@@ -1,4 +1,4 @@
-package configuration;
+package addressbook.configuration;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -78,8 +78,8 @@ public class SessionConfiguration
       {
          //If an IOException occurs, set all properties and save them
          //to an XML file
-         setRegion();
-         setFormat();
+         setDefaultRegion();
+         setDefaultFormat();
          setAddressBook();
          initializeAddressBook();
          storeProperties();
@@ -102,6 +102,11 @@ public class SessionConfiguration
       {
          nnpe.printStackTrace();
       }
+   }
+   
+   private static void setDefaultFormat()
+   {
+      properties.setProperty(FORMAT_KEY, JSON);
    }
    
    //Get data format choice from user and store it in properties
@@ -179,10 +184,9 @@ public class SessionConfiguration
       }
    }
    
-   private static void setRegion()
+   private static void setDefaultRegion()
    {
       properties.setProperty(REGION_KEY, US);
-      //TODO: exand this method to support multiple regions.
    }
    
    //Store the new system properties to a file

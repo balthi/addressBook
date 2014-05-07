@@ -1,11 +1,11 @@
-package outputFormatter;
+package addressbook.format;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URI;
 
-import static configuration.SessionConfiguration.NL;
+import static addressbook.configuration.SessionConfiguration.NL;
 
 /**
 * Abstract class formats fields and values to specific format.

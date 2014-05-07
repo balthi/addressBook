@@ -1,9 +1,9 @@
-package outputFormatter;
+package addressbook.format;
 
-import static configuration.SessionConfiguration.FORMAT;
-import static configuration.SessionConfiguration.XML;
-import static configuration.SessionConfiguration.JSON;
-import static configuration.SessionConfiguration.PLAIN;
+import static addressbook.configuration.SessionConfiguration.FORMAT;
+import static addressbook.configuration.SessionConfiguration.XML;
+import static addressbook.configuration.SessionConfiguration.JSON;
+import static addressbook.configuration.SessionConfiguration.PLAIN;
 
 public class FormatterFactory
 {

@@ -1,15 +1,12 @@
-package addressBook;
+package addressbook;
 
-import configuration.SessionConfiguration;
+import addressbook.configuration.SessionConfiguration;
+import java.util.Iterator;
 import java.util.Scanner;
-import outputFormatter.FieldFormatter;
-import outputFormatter.JSONFieldFormatter;
-import outputFormatter.PlainTextFieldFormatter;
-import outputFormatter.XMLFieldFormatter;
 
-import static configuration.SessionConfiguration.NL;
-import static configuration.SessionConfiguration.ADD;
-import static configuration.SessionConfiguration.QUIT;
+import static addressbook.configuration.SessionConfiguration.NL;
+import static addressbook.configuration.SessionConfiguration.ADD;
+import static addressbook.configuration.SessionConfiguration.QUIT;
 
 public class AddressBook
 {
@@ -30,6 +27,8 @@ public class AddressBook
       in.useDelimiter(NL);
       String choice;
       Contact contact;
+      ContactList cl = new ContactList();
+      Iterator<Contact> iterator = cl.iterator();
       
       System.out.println(WELCOME_MSG);
       
@@ -39,7 +38,7 @@ public class AddressBook
          if(choice.equals(ADD))
          {
             contact = contactBuilder.createContact();
-            contact.writeToFile();
+            cl.addContact(contact);
          }
          else if(choice.equals(QUIT))
          {
@@ -47,6 +46,11 @@ public class AddressBook
          }
          
       } while(!done);
+      
+      while(iterator.hasNext())
+      {
+         iterator.next().writeToFile();
+      }
       
    }
 }

@@ -1,4 +1,4 @@
-package outputFormatter;
+package addressbook.format;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -6,26 +6,26 @@ import java.net.URI;
 import java.util.Scanner;
 import junit.framework.TestCase;
 
-import static configuration.SessionConfiguration.NL;
-
-public class XMLFieldFormatter_Test extends TestCase
+public class PlainTextFieldFormatter_Test extends TestCase
 {
-   private XMLFieldFormatter formatter;
-   private static final String INDENT = "   "; //indent three spaces
-   private static final String EXPECTED = ("<person Id=\"Bob Wilson\">" + NL
-                                          + INDENT + "<address>123 Groovy St.</address>" + NL
-                                          + INDENT + "<city>Austin</city>" + NL
-                                          + INDENT + "<state>TX</state>" + NL
-                                          + INDENT + "<zip>78755</zip>" + NL
-                                          + "</person>" + NL);
+   private static String NL = System.getProperty("line.separator");
+   private PlainTextFieldFormatter formatter;
+   private static final String EXPECTED = ("person: Bob Wilson" + NL
+                                          + "address: 123 Groovy St." + NL
+                                          + "city: Austin" + NL
+                                          + "state: TX" + NL
+                                          + "zip: 78755"+ NL
+                                          + NL);
+                               
    private static final String[] FIELDS = {"person", "address", "city", "state", "zip"};
    private static final String[] VALUES = {"Bob Wilson", "123 Groovy St.", "Austin", "TX", "78755"};
-   private static final String FILE_PATH = "R\\output\\test\\XMLTestFile.xml";
+   private static final String FILE_PATH = "R\\output\\test\\PlainTextTestFile.txt";
    private URI testFile;
+   
    
    public void setUp()
    {
-      formatter = new XMLFieldFormatter();
+      formatter = new PlainTextFieldFormatter();
       File f = new File(FILE_PATH);
       testFile = f.toURI();
    }

@@ -1,6 +1,6 @@
-package addressBook;
+package addressbook;
 
-import configuration.SessionConfiguration;
+import addressbook.configuration.SessionConfiguration;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -9,10 +9,10 @@ import java.lang.SecurityException;
 import java.util.Scanner;
 import junit.framework.TestCase;
 
-import static configuration.SessionConfiguration.NL;
-import static configuration.SessionConfiguration.JSON;
-import static configuration.SessionConfiguration.ADDRESS_BOOK;
-import static configuration.SessionConfiguration.USER;
+import static addressbook.configuration.SessionConfiguration.NL;
+import static addressbook.configuration.SessionConfiguration.JSON;
+import static addressbook.configuration.SessionConfiguration.ADDRESS_BOOK;
+import static addressbook.configuration.SessionConfiguration.USER;
 
 public class Contact_Test extends TestCase
 {
@@ -37,8 +37,8 @@ public class Contact_Test extends TestCase
    
    public void setUp()
    {
-      StringBufferInputStream s = new StringBufferInputStream(JSON);
-      System.setIn(s);
+      //StringBufferInputStream s = new StringBufferInputStream(JSON);
+      //System.setIn(s);
       SessionConfiguration sc = SessionConfiguration.getSessionConfiguration();
       sc.loadSessionConfiguration();
       this.contactOne = new Contact(BOB, GROOVY, AUSTIN, TX, AUSTIN_ZIP);

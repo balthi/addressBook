@@ -1,6 +1,6 @@
-package outputFormatter;
+package addressbook.format;
 
-import static configuration.SessionConfiguration.NL;
+import static addressbook.configuration.SessionConfiguration.NL;
 
 /**
 * Extends FieldFormatter. Formats fields and values as XML.

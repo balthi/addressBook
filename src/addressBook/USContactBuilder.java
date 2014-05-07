@@ -1,9 +1,9 @@
-package addressBook;
+package addressbook;
 
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-import static configuration.SessionConfiguration.NL;
+import static addressbook.configuration.SessionConfiguration.NL;
 
 public class USContactBuilder implements ContactBuilder
 {

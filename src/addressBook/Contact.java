@@ -1,12 +1,13 @@
-package addressBook;
+package addressbook;
 
-import outputFormatter.FieldFormatter;
-import outputFormatter.FormatterFactory;
-import outputFormatter.XMLFieldFormatter;
-import outputFormatter.JSONFieldFormatter;
-import outputFormatter.PlainTextFieldFormatter;
+import addressbook.format.FieldFormatter;
+import addressbook.format.FormatterFactory;
+import addressbook.format.XMLFieldFormatter;
+import addressbook.format.JSONFieldFormatter;
+import addressbook.format.PlainTextFieldFormatter;
 
-import static configuration.SessionConfiguration.ADDRESS_BOOK;
+import static addressbook.configuration.SessionConfiguration.ADDRESS_BOOK;
+import static addressbook.configuration.SessionConfiguration.NL;
 
 public class Contact 
 {
@@ -40,5 +41,12 @@ public class Contact
       String[] values = {name, address, city, state, zip};
       
       formatter.writeToFile(fields, values, ADDRESS_BOOK);
+   }
+   
+   @Override
+   public String toString()
+   {
+      String out = (name + NL + address + NL + city + ", " + state + " " + zip + NL);
+      return out;
    }
 }
