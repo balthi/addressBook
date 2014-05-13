@@ -1,5 +1,6 @@
 package addressbook.format;
 
+import java.util.Map;
 import static addressbook.configuration.SessionConfiguration.NL;
 
 /**
@@ -8,18 +9,19 @@ import static addressbook.configuration.SessionConfiguration.NL;
 public class JSONFieldFormatter extends FieldFormatter
 {   
    @Override
-   protected String getString(String[] fields, String[] values)
+   protected String getString(Map<String, String> m)
    {
-      int i;
-      int last = fields.length - 1;
+      int size = m.size();
+      int i = 0;
       String output;
       
       output = ("{");
       
-      for(i=0; i<fields.length; i++)
+      for(Map.Entry<String, String> entry : m.entrySet())
       {
-         output = (output + "\"" + fields[i] + "\":\"" + values[i] + "\"");
-         if(i < last)
+         output = (output + "\"" + entry.getKey() + "\":\"" + entry.getValue() + "\"");
+         i += 1;
+         if(i < size)
          {
             output = (output + ",");
          }

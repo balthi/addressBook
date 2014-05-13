@@ -1,5 +1,6 @@
 package addressbook.format;
 
+import java.util.Map;
 import static addressbook.configuration.SessionConfiguration.NL;
 
 /**
@@ -9,14 +10,13 @@ public class PlainTextFieldFormatter extends FieldFormatter
 {
    
    @Override
-   protected String getString(String[] fields, String[] values)
+   protected String getString(Map<String, String> m)
    {
-      int i;
       String output = "";
       
-      for(i=0; i<fields.length; i++)
+      for(Map.Entry<String, String> entry : m.entrySet())
       {
-         output = (output + fields[i] + ": " + values[i] + NL);
+         output = (output + entry.getKey() + ": " + entry.getValue() + NL);
       }
       
       output = (output + NL);

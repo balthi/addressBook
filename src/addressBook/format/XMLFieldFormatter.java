@@ -1,5 +1,6 @@
 package addressbook.format;
 
+import java.util.Map;
 import static addressbook.configuration.SessionConfiguration.NL;
 
 /**
@@ -10,19 +11,29 @@ public class XMLFieldFormatter extends FieldFormatter
    private static final String INDENT = "   "; //Default indent is three spaces
    
    @Override
-   protected String getString(String[] fields, String[] values)
+   protected String getString(Map<String, String> m)
    {
-      int i;
-      String output;
+      int i = 0;
+      String output = "";
+      String label = "";
       
-      output = ("<" + fields[0] + " Id=\"" + values[0] + "\">" + NL);
+      //output = ("<" + fields[0] + " Id=\"" + values[0] + "\">" + NL);
       
-      for(i=1; i<fields.length; i++)
+      for(Map.Entry<String, String> entry : m.entrySet())
       {
-         output = (output + INDENT + "<" + fields[i] + ">" + values[i] + "</" + fields[i] + ">" + NL);
+         if(i==0)
+         {
+            label = entry.getKey();
+            output = ("<" + label + " Id=\"" + entry.getValue() + "\">" + NL);
+            i += 1;
+         }
+         else
+         {
+            output = (output + INDENT + "<" + entry.getKey() + ">" + entry.getValue() + "</" + entry.getKey() + ">" + NL);
+         }
       }
       
-      output = (output + "</" + fields[0] + ">" + NL);
+      output = (output + "</" + label + ">" + NL);
       
       return output;
    }

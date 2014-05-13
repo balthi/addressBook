@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URI;
+import java.util.Map;
 
 import static addressbook.configuration.SessionConfiguration.NL;
 
@@ -12,31 +13,24 @@ import static addressbook.configuration.SessionConfiguration.NL;
 */
 public abstract class FieldFormatter 
 {
-   protected static final String ERR_MSG = "fields and values must be the same length";
    
    /**
    * Appends the fields and values to the file specified
    */
-   public void writeToFile(String[] fields, String[] values, URI fileName)
+   public void writeToFile(Map<String, String> m, URI fileName)
    {
-      if(fields.length != values.length)
-      {
-         System.err.println(ERR_MSG);
-         return;
-      }
-      String content=getString(fields, values);
+      String content=getString(m);
       writeFile(content, fileName);
 
    }
    
-   protected String getString(String[] fields, String[] values)
+   protected String getString(Map<String, String> m)
    {
-      int i;
       String output = "";
       
-      for(i=0; i<fields.length; i++)
+      for(Map.Entry<String, String> entry : m.entrySet())
       {
-         output = (output + fields[i] + " " + values[i] + NL);
+         output = (output + entry.getKey() + " " + entry.getValue() + NL);
       }
       return output;
    }

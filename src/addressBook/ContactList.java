@@ -2,6 +2,7 @@ package addressbook;
 
 import java.util.Iterator;
 import java.lang.Iterable;
+import java.lang.IllegalStateException;
 import java.lang.NullPointerException;
 import java.util.NoSuchElementException;
 
@@ -127,9 +128,10 @@ public class ContactList implements Iterable
       private ContactList contactList;
       private LinkedContact lc;
       private boolean headReturned = false;
+      private boolean nextCalled = false;
       
       /**
-      * Returns true if there is an unreturned contact in the list
+      * Returns true if the iteration has more elements
       */
       public boolean hasNext()
       {
@@ -152,9 +154,8 @@ public class ContactList implements Iterable
       }
       
       /**
-      * Returns the next contact in the list. 
-      * Throws NullPointerException when the end of 
-      * the list is reached.
+      * Returns the next contact in the iteration
+      * Throws NoSuchElementException if the iteration has no more elements
       */
       public Contact next()
       {
@@ -177,40 +178,57 @@ public class ContactList implements Iterable
             }
             else
             {
-               throw new NoSuchElementException("End of contact list reached.");
+               throw new NoSuchElementException("Iteration has no more contacts.");
             }
          }
+         nextCalled = true;
          return contact;
       }
       
+      /**
+      * Removes the the last element called by next() from the
+      * underlying collection. Throws IllegalStateException if
+      * next has not been called, or if remove has already 
+      * been called on the last call to the next() method.
+      */
       public void remove()
       {
-         LinkedContact previous;
-         LinkedContact next;
-         try
+         if(!nextCalled)
          {
-            previous = lc.getPrevious();
+            throw new IllegalStateException("Remove has already been called on the contact");
          }
-         catch(NullPointerException npe)
+         else
          {
-            head = lc.getNext();
-            head.setPrevious(null);
-            return;
-         }
+            LinkedContact previous;
+            LinkedContact next;
+            try
+            {
+               previous = lc.getPrevious();
+            }
+            catch(NullPointerException npe)
+            {
+               head = lc.getNext();
+               head.setPrevious(null);
+               nextCalled = false;
+               return;
+            }
          
-         try
-         {
-            next = lc.getNext();
-         }
-         catch(NullPointerException npe)
-         {
-            tail = lc.getPrevious();
-            tail.setNext(null);
-            return;
-         }
+            try
+            {
+               next = lc.getNext();
+            }
+            catch(NullPointerException npe)
+            {
+               tail = lc.getPrevious();
+               tail.setNext(null);
+               nextCalled = false;
+               return;
+            }
          
-         previous.setNext(next);
-         next.setPrevious(previous);
+            previous.setNext(next);
+            next.setPrevious(previous);
+            nextCalled = false;
+         }
       }
    }
 }

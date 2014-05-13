@@ -68,9 +68,7 @@ public class ContactList_Test extends TestCase
          contact = iterator.next();
          if(i==2)
          {
-            assertTrue("Contacts do not macth in testIteratorTail."
-                     + "Expected " + NL + Joe.toString()
-                     + "Found " + NL + contact.toString(), Joe.equals(contact));
+            assertTrue("Contacts do not macth in testIteratorTail.", Joe.equals(contact));
          }
       }
    }
@@ -86,9 +84,7 @@ public class ContactList_Test extends TestCase
       Contact one = iterator.next();
       Contact two = iterator.next();
       assertTrue("First Contacts do not macth in testIteratorRemoveContactAfterIterator.", Bob.equals(one));
-      assertTrue("Second Contacts do not macth in testIteratorRemoveContactAfterIterator." + NL
-                  + "Expected " + NL + Joe.toString() + NL
-                  + "Found " + NL + two.toString(), Joe.equals(two));
+      assertTrue("Second Contacts do not macth in testIteratorRemoveContactAfterIterator.", Joe.equals(two));
    }
    
    public void testIteratorRemoveContactBeforeIterator()
@@ -98,13 +94,17 @@ public class ContactList_Test extends TestCase
       cl.addContact(Susan);
       cl.addContact(Joe);
       iterator = cl.iterator();
+      assertTrue("hasNext failed on one in testIteratorRemoveContactBeforeIterator", iterator.hasNext());
       Contact one = iterator.next();
+      assertTrue("hasNext failed on two in testIteratorRemoveContactBeforeIterator", iterator.hasNext());
       Contact two = iterator.next();
       cl.removeContact(Bob);
+      assertTrue("hasNext failed on three in testIteratorRemoveContactBeforeIterator", iterator.hasNext());
       Contact three = iterator.next();
-      assertTrue("Contacts do not macth in testIteratorRemoveContactBeforeIterator.", Bob.equals(one));
-      assertTrue("Contacts do not macth in testIteratorRemoveContactBeforeIterator.", Susan.equals(two));
-      assertTrue("Contacts do not macth in testIteratorRemoveContactBeforeIterator.", Joe.equals(three));
+      assertTrue("First contacts do not macth in testIteratorRemoveContactBeforeIterator.", Bob.equals(one));
+      assertTrue("Second contacts do not macth in testIteratorRemoveContactBeforeIterator.", Susan.equals(two));
+      assertTrue("Third contacts do not macth in testIteratorRemoveContactBeforeIterator.", Joe.equals(three));
+      assertTrue("hasNext failed on four in testIteratorRemoveContactBeforeIterator", !iterator.hasNext());
    }
    
    public void testIteratorRemoveContactOnIterator()
@@ -118,9 +118,9 @@ public class ContactList_Test extends TestCase
       Contact two = iterator.next();
       cl.removeContact(Susan);
       Contact three = iterator.next();
-      assertTrue("Contacts do not macth in testIteratorRemoveContactOnIterator.", Bob.equals(one));
-      assertTrue("Contacts do not macth in testIteratorRemoveContactOnIterator.", Susan.equals(two));
-      assertTrue("Contacts do not macth in testIteratorRemoveContactOnIterator.", Joe.equals(three));
+      assertTrue("First contacts do not macth in testIteratorRemoveContactOnIterator.", Bob.equals(one));
+      assertTrue("Second contacts do not macth in testIteratorRemoveContactOnIterator.", Susan.equals(two));
+      assertTrue("Third contacts do not macth in testIteratorRemoveContactOnIterator.", Joe.equals(three));
    }
    
    public void testAddContact()
@@ -137,5 +137,18 @@ public class ContactList_Test extends TestCase
          contact = iterator.next();
       }
       assertTrue("Contacts do not macth in testAddContact.", Mary.equals(contact));
+   }
+   
+   public void testAddContactIteratorOnTail()
+   {
+      cl = new ContactList();
+      cl.addContact(Bob);
+      cl.addContact(Susan);
+      iterator = cl.iterator();
+      iterator.next();
+      iterator.next();
+      cl.addContact(Joe);
+      Contact contact = iterator.next();
+      assertTrue("Contacts do not match in testAddContactIteratorOnTail.", Joe.equals(contact));
    }
 }
